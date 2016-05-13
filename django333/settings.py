@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import pymysql
-pymysql.install_as_MySQLdb()
+#import pymysql
+#import psycopg2
+
+#pymysql.install_as_MySQLdb()
 
 
 
@@ -93,6 +95,8 @@ DATABASES = {
         #'PORT': '3306',
     }
 }
+
+
 
 
 # Password validation
