@@ -2,10 +2,36 @@
 
 {% block content %}
 
-    싸이즈 {{ allposts|length }}
+ {% comment %}   싸이즈 {{ allposts|length }}
     total_page {{ total_page }}
 
-    curpage {{  curpage }}
+    curpage {{  curpage }}{% endcomment %}
+
+    <!--페이징 처리 부분-->
+     <div class="paginator">
+        {% for page in o_pages %}
+
+
+            {%  if page == curpage %}
+
+                <a style="color:red;" href="./../../postlist/{{page}}">  {{ page }}</a>
+            {% else %}
+                <a href="./../../postlist/{{page}}">  {{ page }}</a>
+
+            {% endif %}
+
+            {%  if page == total_page %}
+
+                <!--공백-->
+            {% else %}
+                |
+
+            {% endif %}
+
+
+        {% endfor %}
+    </div>
+
 
     {% for post in posts %}
         <div class="post">
@@ -25,22 +51,5 @@
         </div>
     {% endfor %}
 
-    <div class="paginator">
 
-        {% for page in o_pages %}
-
-
-            {%  if page == curpage %}
-                
-                <a style="color:red;" href="./../../postlist/{{page}}">  {{ page }}</a>
-            {% else %}
-                <a href="./../../postlist/{{page}}">  {{ page }}</a>
-
-            {% endif %}
-
-            |
-        {% endfor %}
-
-
-    </div>
 {% endblock content %}

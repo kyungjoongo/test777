@@ -20,10 +20,11 @@ def post_list(request,curpage=1):
     start_offset = (int(curpage)-1)*10
     end_offset = int(curpage)*10
 
-    posts = Post.objects.all().order_by('id')[start_offset:end_offset]
+    posts = Post.objects.all().order_by('-id')[start_offset:end_offset]
 
     allposts = Post.objects.all()
 
+    ''' totalpages '''
     total_page = allposts.__len__() / 10 + 1
 
     o_pages = []
@@ -31,7 +32,7 @@ def post_list(request,curpage=1):
         o_pages.append(i+1)
 
 
-    return render(request, 'blog/post_list.html', {'posts': posts, 'allposts': allposts, 'total_page' : total_page, 'o_pages': o_pages, 'curpage' :int(curpage)})
+    return render(request, 'blog/post_list.html', {'posts': posts, 'allposts': allposts, 'total_page' : int(total_page), 'o_pages': o_pages, 'curpage' :int(curpage)})
 
 
 def post_detail(request, pk):
@@ -49,8 +50,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
-
+            return redirect('blog.views.post_list')
 
     else:
         form = PostForm()
