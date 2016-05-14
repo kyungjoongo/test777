@@ -29,5 +29,9 @@ urlpatterns = [
 
     url(r'^post/new/$', views.post_new, name='post_new'),
 
+    url(r'^home/$', views.home),
+
+    url(r'^ajaxtest/', views.ajaxtest),
+
 
 ]
